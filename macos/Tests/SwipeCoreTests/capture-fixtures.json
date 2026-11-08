@@ -1,0 +1,98 @@
+[
+  {
+    "rate": 44100,
+    "acceptEarly": false,
+    "candidates": [
+      {
+        "id": 1,
+        "phase": "early",
+        "startFrame": 11103,
+        "onsetFrame": 52992,
+        "emitFrame": 61824,
+        "sourceStartFrame": 48582,
+        "sourceEndFrame": 61824,
+        "sourceSamples": 13242,
+        "destinationOffset": 37479,
+        "sha256": "774d2b5a97d074b99e7c787bc9eb50fd4243688767adbf27661165abc0aa4dd7"
+      },
+      {
+        "id": 1,
+        "phase": "fallback",
+        "startFrame": 8952,
+        "onsetFrame": 52992,
+        "emitFrame": 97152,
+        "sourceStartFrame": 8952,
+        "sourceEndFrame": 97152,
+        "sourceSamples": 88200,
+        "destinationOffset": 0,
+        "sha256": "50cad46cfbe2fbec19d92389c44317868c015f7741754967256cdd990131e46c"
+      }
+    ]
+  },
+  {
+    "rate": 44100,
+    "acceptEarly": true,
+    "candidates": [
+      {
+        "id": 1,
+        "phase": "early",
+        "startFrame": 11103,
+        "onsetFrame": 52992,
+        "emitFrame": 61824,
+        "sourceStartFrame": 48582,
+        "sourceEndFrame": 61824,
+        "sourceSamples": 13242,
+        "destinationOffset": 37479,
+        "sha256": "774d2b5a97d074b99e7c787bc9eb50fd4243688767adbf27661165abc0aa4dd7"
+      }
+    ]
+  },
+  {
+    "rate": 48000,
+    "acceptEarly": false,
+    "candidates": [
+      {
+        "id": 1,
+        "phase": "early",
+        "startFrame": 12128,
+        "onsetFrame": 57728,
+        "emitFrame": 67328,
+        "sourceStartFrame": 52928,
+        "sourceEndFrame": 67328,
+        "sourceSamples": 14400,
+        "destinationOffset": 40800,
+        "sha256": "87271c95fa20823e00de500719b09291bdaf30350265f2190db7d3105e0e39e2"
+      },
+      {
+        "id": 1,
+        "phase": "fallback",
+        "startFrame": 9728,
+        "onsetFrame": 57728,
+        "emitFrame": 105728,
+        "sourceStartFrame": 9728,
+        "sourceEndFrame": 105728,
+        "sourceSamples": 96000,
+        "destinationOffset": 0,
+        "sha256": "451e30c27418c8f7083ee47822655bdd7aeab024f3da6e4bd549864c26e37708"
+      }
+    ]
+  },
+  {
+    "rate": 48000,
+    "acceptEarly": true,
+    "candidates": [
+      {
+        "id": 1,
+        "phase": "early",
+        "startFrame": 12128,
+        "onsetFrame": 57728,
+        "emitFrame": 67328,
+        "sourceStartFrame": 52928,
+        "sourceEndFrame": 67328,
+        "sourceSamples": 14400,
+        "destinationOffset": 40800,
+        "sha256": "87271c95fa20823e00de500719b09291bdaf30350265f2190db7d3105e0e39e2"
+      }
+    ]
+  }
+]

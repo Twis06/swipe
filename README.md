@@ -120,3 +120,7 @@ Audio goes from the browser to a server bound to `127.0.0.1`. The app does not s
 In the live preview, click each keycap and press the desired key or shortcut. Allow the app running Swipe under **System Settings → Privacy & Security → Accessibility**, start listening, then click **Enable keys**. Switch to your target app: accepted swipes send its mapped key. Keys begin disabled on every reload. **Disable keys** keeps recognition running; **Stop listening** disables output and releases the microphone. Close the tab to stop. If the page loses contact, the server disarms after 20 seconds.
 
 Only accepted gestures can receive short-lived, single-use action tickets. Uncertain sounds do not send keys. Mappings use physical key positions (browser KeyboardEvent.code); non-US keyboard layouts may label those positions differently. A first test with arrow keys in a scratch document is recommended.
+
+### Native macOS app
+
+Swipe also has a lightweight Swift menu-bar app with mappings for volume, mute, lock screen, sleep, display off, and keyboard shortcuts. It uses the existing local Python recognizer without a browser or HTTP server. Build and usage: [macOS app](macos/README.md).

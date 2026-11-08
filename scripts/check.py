@@ -7,6 +7,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_TESTS = [
+    'tests.test_native_worker',
     'tests.test_key_bindings',
     'tests.test_public_runtime.PublicRuntimeTests',
     'tests.test_public_runtime.PublicEndpointTests',
