@@ -6,7 +6,9 @@ SWIPE_APP="$SWIPE_ROOT/dist/Swipe.app"
 swift build --package-path "$SWIPE_ROOT/macos" -c release --scratch-path "$SWIPE_BUILD"
 SWIPE_BIN="$(swift build --package-path "$SWIPE_ROOT/macos" -c release --scratch-path "$SWIPE_BUILD" --show-bin-path)"
 mkdir -p "$SWIPE_APP/Contents/MacOS" "$SWIPE_APP/Contents/Resources"
-cp "$SWIPE_BIN/Swipe" "$SWIPE_APP/Contents/MacOS/Swipe"
+# Replace the inode instead of overwriting executable pages in a running app.
+cp "$SWIPE_BIN/Swipe" "$SWIPE_APP/Contents/MacOS/.Swipe.next"
+mv -f "$SWIPE_APP/Contents/MacOS/.Swipe.next" "$SWIPE_APP/Contents/MacOS/Swipe"
 python3 - "$SWIPE_APP" "$SWIPE_ROOT" <<'PY'
 import json,plistlib,sys
 from pathlib import Path

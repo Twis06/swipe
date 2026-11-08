@@ -1,5 +1,5 @@
 import Foundation
-public enum SwipeAction: String, CaseIterable, Codable, Identifiable {
+public enum SwipeAction: String, CaseIterable, Codable, Identifiable, Sendable {
     case volumeUp, volumeDown, mute, lockScreen, sleep, displaySleep, shortcut, none
     public var id: String { rawValue }
     public var title: String {
@@ -29,7 +29,7 @@ public enum SwipeAction: String, CaseIterable, Codable, Identifiable {
     public var needsAccessibility: Bool { self == .lockScreen || self == .shortcut }
     public var pausesListening: Bool { [.lockScreen, .sleep, .displaySleep].contains(self) }
 }
-public struct Shortcut: Codable, Equatable {
+public struct Shortcut: Codable, Equatable, Sendable {
     public var keyCode: UInt16
     public var modifiers: UInt64
     public var label: String
@@ -37,7 +37,7 @@ public struct Shortcut: Codable, Equatable {
     public static let up = Shortcut(keyCode: 126, label: "↑")
     public static let down = Shortcut(keyCode: 125, label: "↓")
 }
-public struct Mapping: Codable, Equatable {
+public struct Mapping: Codable, Equatable, Sendable {
     public var action: SwipeAction
     public var shortcut: Shortcut
     public init(action: SwipeAction, shortcut: Shortcut) { self.action = action; self.shortcut = shortcut }

@@ -2,7 +2,8 @@ import CoreAudio
 import AudioToolbox
 import SwipeCore
 
-final class Microphone {
+// Lifecycle state belongs to audio-control; sample state belongs to the capture queue.
+final class AudioQueueMicrophoneDriver: MicrophoneDriver, @unchecked Sendable {
     private var audioQueue: AudioQueueRef?
     private let queue = DispatchQueue(label: "swipe.capture", qos: .userInitiated)
     private let rate = 48000

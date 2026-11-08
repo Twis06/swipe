@@ -26,7 +26,7 @@ This version is a **native app around the existing Python recognizer**, not an a
 3. Keep still for one second, then swipe the left speaker grille once toward the screen or palm rest. Lift your finger and wait for the result.
 4. Pause or quit from the menu bar. Closing the settings window keeps the explicitly started listener running.
 
-Every launch begins paused. Mappings and volume step are saved in macOS preferences; listening state is not. Lock screen, Sleep Mac, and Turn display off pause before executing, so waking/unlocking does not automatically resume. Only accepted, non-overlapping predictions cause actions; uncertain/background results are ignored. Changing mappings is disabled while listening. Use discrete swipes with a lift between them; continuous finger movement is not a supported control mode.
+Every launch begins paused. Mappings and volume step are saved in macOS preferences; listening state is not. Lock screen, Sleep Mac, and Turn display off release the microphone before executing. External screen lock, display sleep, system sleep, and user switching also suspend capture. Listening resumes after returning to the unlocked, awake session only if it was requested before suspension. **Pause listening** cancels this automatic resume, including while waiting for unlock. Each reconnect starts a fresh capture window and background check; old predictions cannot execute. Only accepted, non-overlapping predictions cause actions; uncertain/background results are ignored. Changing mappings is disabled while listening. Use discrete swipes with a lift between them; continuous finger movement is not a supported control mode.
 
 **Permissions:** volume/mute, system sleep, and display sleep do not need Accessibility. Keyboard shortcuts and lock screen do; click **Allow access**, enable Swipe in **System Settings → Privacy & Security → Accessibility**, then return. Accessibility is requested only through that action. Microphone denial has a separate recovery button. System-level actions should be mapped with the experimental recognizer's possible mistakes in mind.
 
@@ -35,7 +35,10 @@ Every launch begins paused. Mappings and volume step are saved in macOS preferen
 - `SwipeCore/GestureCapture.swift`: port of the released 128-frame early/fallback capture logic. Synthetic parity fixtures compare exact PCM hashes, frame origins, and emission times against the browser worklet at 44.1/48 kHz.
 - `SwipeCore/EventGate`: accepted-result and duplicate-event gate.
 - `SwipeApp/Microphone.swift`: dedicated Audio Queue input pinned to the built-in device UID, 48 kHz mono Float32 capture, 128-frame reblocking, first-second warmup, and a delivered-frame watchdog. It does not route microphone audio through an output engine or change system defaults.
-- `SwipeApp/Recognizer.swift`: bounded one-request stdin/stdout bridge, timeout/exit handling, stale result protection via controller generation.
+- `SwipeApp/MicrophoneControl.swift`: serial background lifecycle operations, immediate callback cancellation, and asynchronous disposal; start/pause never wait for the audio device on the UI thread.
+- `SwipeCore/ListeningSession.swift` and `SwipeApp/SessionMonitor.swift`: independent user intent and OS suspension reasons. Workspace sleep/session events combine with macOS screen-lock distributed notifications, as also used by [Hammerspoon's watcher](https://github.com/Hammerspoon/hammerspoon/blob/master/extensions/caffeinate/libcaffeinate_watcher.m). Screen-lock notification names are a macOS convention, not a documented AppKit API contract.
+- `SwipeApp/Recognizer.swift`: bounded one-request stdin/stdout bridge, background process launch/WAV encoding, timeout/exit handling, and stale result protection via controller generation.
+- Meter updates are isolated from the settings form; menu items update only when status/intent changes.
 - `swipe/native_worker.py`: original `PreviewService` and model verification over private stdin/stdout; reads local models, with no network listener, audio recordings, or training.
 - `SwipeApp/SystemActions.swift`: native action dispatch with required OS permissions.
 

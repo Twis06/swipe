@@ -35,7 +35,7 @@ struct ContentView: View {
             }
             VStack(alignment: .leading, spacing: 9) {
                 Label(model.result, systemImage: model.resultIcon).font(.callout.weight(.medium)).lineLimit(2)
-                ProgressView(value: model.level).tint(accent).accessibilityLabel("Microphone level")
+                MicrophoneLevelView(meter: model.meter).tint(accent)
                 Text(model.detail).font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             if let error = model.error {
@@ -52,10 +52,10 @@ struct ContentView: View {
                 }
             }
             if model.disruptive {
-                Text("Lock and sleep pause Swipe. Resume it from the menu bar.").font(.callout).foregroundStyle(.secondary)
+                Text("Lock and sleep pause the microphone. Listening resumes when you return.").font(.callout).foregroundStyle(.secondary)
             }
             HStack {
-                Button(model.active ? "Pause listening" : "Start listening") { model.active ? model.stop() : model.start() }
+                Button(model.wantsListening ? "Pause listening" : "Start listening") { model.wantsListening ? model.stop() : model.start() }
                     .buttonStyle(.borderedProminent).tint(accent).controlSize(.large)
                     .disabled(model.recordingDirection != nil)
                 Spacer()
@@ -126,4 +126,9 @@ final class KeyCaptureView: NSTextField {
         let prefix = [(NSEvent.ModifierFlags.control,"⌃"),(.option,"⌥"),(.shift,"⇧"),(.command,"⌘")].filter { flags.contains($0.0) }.map { $0.1 }.joined()
         captured?(Shortcut(keyCode: event.keyCode, modifiers: UInt64(flags.rawValue), label: prefix + glyph))
     }
+}
+
+private struct MicrophoneLevelView: View {
+    @ObservedObject var meter: AudioMeter
+    var body: some View { ProgressView(value: meter.value).accessibilityLabel("Microphone level") }
 }

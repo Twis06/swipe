@@ -14,6 +14,7 @@ struct SwipeError: LocalizedError {
     private var input: FileHandle?
     private let queue = DispatchQueue(label: "swipe.recognizer", qos: .userInitiated)
     private var timeout: DispatchWorkItem?
+    private var operation = OperationToken()
     var onFailure: ((String) -> Void)?
     func start(project: URL, ready: @escaping (Result<Void, Error>) -> Void) throws {
         stop()
@@ -39,13 +40,17 @@ struct SwipeError: LocalizedError {
                 self.onFailure?("The recognizer stopped. Start listening to reconnect.")
             }
         }
-        try child.run(); process = child; input = stdin.fileHandleForWriting
+        let current = OperationToken(); operation = current
+        process = child; input = stdin.fileHandleForWriting
         scheduleTimeout(child, seconds: 15)
         let output = stdout.fileHandleForReading
         queue.async { [weak self] in
             let reader = JSONLineReader(output)
             let result: Result<Void, Error>
             do {
+                guard !current.isCancelled else { return }
+                try child.run()
+                guard !current.isCancelled else { child.terminate(); return }
                 let info = try JSONSerialization.jsonObject(with: reader.read()) as? [String: Any]
                 guard info?["ready"] as? Bool == true else { throw SwipeError(info?["error"] as? String ?? "The local model could not load.") }
                 result = .success(())
@@ -58,11 +63,20 @@ struct SwipeError: LocalizedError {
     }
     private var reader: JSONLineReader?
     func predict(_ data: Data, completion: @escaping (Result<Prediction, Error>) -> Void) {
+        send(encode: { data }, completion: completion)
+    }
+    func predict(samples: [Float], rate: Int, completion: @escaping (Result<Prediction, Error>) -> Void) {
+        send(encode: { FloatWAV.encode(samples, rate: rate) }, completion: completion)
+    }
+    private func send(encode: @escaping () -> Data, completion: @escaping (Result<Prediction, Error>) -> Void) {
         guard let child = process, let input, let reader else { completion(.failure(SwipeError("The recognizer is not connected."))); return }
+        let current = operation
         scheduleTimeout(child, seconds: 6)
         queue.async { [weak self] in
             let result: Result<Prediction, Error>
             do {
+                guard !current.isCancelled else { return }
+                let data = encode()
                 var size = UInt32(data.count).littleEndian
                 var framed = withUnsafeBytes(of: &size) { Data($0) }; framed.append(data)
                 try input.write(contentsOf: framed)
@@ -85,6 +99,7 @@ struct SwipeError: LocalizedError {
         timeout = work; DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: work)
     }
     func stop() {
+        operation.cancel()
         timeout?.cancel(); timeout = nil
         let old = process; process = nil; reader = nil
         try? input?.close(); input = nil

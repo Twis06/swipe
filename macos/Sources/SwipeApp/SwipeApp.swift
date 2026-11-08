@@ -15,6 +15,7 @@ import SwiftUI
     private var window: NSWindow!
     private var startItem: NSMenuItem!
     private var statusLabel: NSMenuItem!
+    private var menuState: String?
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.button?.image = NSImage(systemSymbolName: "arrow.up.arrow.down", accessibilityDescription: "Swipe")
@@ -42,7 +43,9 @@ import SwiftUI
         window.isReleasedWhenClosed = false; window.center(); window.setFrameAutosaveName("SwipeSettings")
         model.stateChanged = { [weak self] in
             guard let self else { return }
-            self.startItem.title = self.model.active ? "Pause listening" : "Start listening"
+            let snapshot = "\(self.model.wantsListening)|\(self.model.status)"
+            guard self.menuState != snapshot else { return }; self.menuState = snapshot
+            self.startItem.title = self.model.wantsListening ? "Pause listening" : "Start listening"
             self.statusLabel.title = "Swipe · \(self.model.status)"
             self.statusItem.button?.appearsDisabled = !self.model.active
         }
@@ -50,7 +53,10 @@ import SwiftUI
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { showWindow(); return true }
     @objc func showWindow() { window.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true) }
-    @objc func toggle() { if model.active { model.stop() } else { model.start(); if model.error != nil { showWindow() } } }
-    @objc func quitApp() { model.stop(); NSApp.terminate(nil) }
-    func applicationWillTerminate(_ notification: Notification) { model.stop() }
+    @objc func toggle() { if model.wantsListening { model.stop() } else { model.start(); if model.error != nil { showWindow() } } }
+    @objc func quitApp() { NSApp.terminate(nil) }
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        model.stop { sender.reply(toApplicationShouldTerminate: true) }
+        return .terminateLater
+    }
 }
