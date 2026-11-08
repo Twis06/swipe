@@ -11,7 +11,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/grille-lab-matplotlib')
+os.environ.setdefault('MPLCONFIGDIR', '/tmp/swipe-matplotlib')
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

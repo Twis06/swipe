@@ -4,7 +4,7 @@ No model is deployed and no raw data is changed. See diagnostics/plan.json.
 Run with .venv/bin/python diagnose_audio.py.
 """
 import os
-os.environ.setdefault('MPLCONFIGDIR', '/tmp/grille-lab-matplotlib')
+os.environ.setdefault('MPLCONFIGDIR', '/tmp/swipe-matplotlib')
 from pathlib import Path
 import json
 import numpy as np

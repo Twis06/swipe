@@ -1,5 +1,5 @@
 ---
-name: Grille Lab
+name: Swipe
 description: A quiet, legible local recording bench.
 colors:
   ink: "#193b36"
@@ -78,7 +78,7 @@ components:
     rounded: "{rounded.stage}"
 ---
 
-# Design System: Grille Lab
+# Design System: Swipe
 
 ## Overview
 

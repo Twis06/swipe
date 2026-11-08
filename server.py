@@ -182,5 +182,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     DATA.mkdir(exist_ok=True)
     server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
-    print(f'Grille Lab: http://localhost:{args.port}\nRecordings: {DATA}', flush=True)
+    print(f'Swipe: http://localhost:{args.port}\nRecordings: {DATA}', flush=True)
     server.serve_forever()

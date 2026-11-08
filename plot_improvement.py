@@ -1,6 +1,6 @@
 """Render the saved experimental results, without fitting any models."""
 import os
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/grille-lab-matplotlib")
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/swipe-matplotlib")
 import json
 from pathlib import Path
 
@@ -47,7 +47,7 @@ axes[1].set_xticks(range(0, 21, 5))
 axes[1].set_xlabel("Swipe clips (20 total)")
 axes[1].set_title("Improved pipeline with rejection enabled")
 axes[1].legend(loc="upper left", bbox_to_anchor=(-.02, -.13), frameon=False, fontsize=9, ncol=2)
-fig.suptitle("Grille Lab: modest direction gain, conservative acceptance", fontsize=17, y=.97)
+fig.suptitle("Swipe: modest direction gain, conservative acceptance", fontsize=17, y=.97)
 fig.text(.5, .88, "Model selection stays inside training folds. Eight idle/typing clips produced zero false activations.", ha="center", fontsize=10)
 fig.text(.02, .025, "Exploratory reuse of one saturated pilot; no independent validation. Noise: 20 dB active-event SNR.\n"
          "Slowing by resampling also shifts pitch. Only 3/10 up swipes and 8/10 down swipes are accepted on the original clips.", fontsize=9, color="#555555")

@@ -193,7 +193,7 @@ def main():
                          'Idle/typing activity candidates do not imply classifier false activations.',
                          'No classifiers fitted or invoked; no direction accuracy measured.']}
     (OUT/'report.json').write_text(json.dumps(report, indent=2)+'\n')
-    os.environ.setdefault('MPLCONFIGDIR', '/tmp/grille-lab-matplotlib')
+    os.environ.setdefault('MPLCONFIGDIR', '/tmp/swipe-matplotlib')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

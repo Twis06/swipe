@@ -1,11 +1,11 @@
-# Grille Lab
+# Swipe
 <!-- impeccable:product-schema 1 -->
 
 ## Platform
 web
 
 ## Users and purpose
-Grille Lab explores microphone-based finger-swipe input on the left speaker grille of a 14-inch M3 Pro MacBook Pro. The current preview uses an MFCC8 reference bank from three built-in-microphone sessions, with a legacy matcher for uncertain results. It includes guided isolated-gesture collection and continuous 15-second recording for further experiments. The owner found the preview usable in live testing; transfer to other users or setups has not been established.
+Swipe explores microphone-based finger-swipe input on the left speaker grille of a 14-inch M3 Pro MacBook Pro. The current preview uses an MFCC8 reference bank from three built-in-microphone sessions, with a legacy matcher for uncertain results. It includes guided isolated-gesture collection and continuous 15-second recording for further experiments. The owner found the preview usable in live testing; transfer to other users or setups has not been established.
 
 ## Scope
 The short-clip collector prompts swipe up/down and captures microphone audio with labels, including idle and typing negatives. Short-clip collection starts only after user microphone connection and a separate built-in-microphone confirmation. Preserve session/block provenance; avoid model accuracy claims before actual evaluation.

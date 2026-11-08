@@ -1,18 +1,20 @@
-# Grille Lab
+# Swipe
 
 **Use the sound of a finger swipe on a MacBook speaker grille as an experimental input.**
 
-Grille Lab listens through the built-in microphone and recognizes **Up** (toward the screen) and **Down** (toward the palm rest). It runs locally, includes a working reference model, and provides guided recording tools for further experiments. It uses the browser's mono microphone stream, not separate access to the MacBook's physical microphones.
+Swipe listens through the built-in microphone and recognizes **Up** (toward the screen) and **Down** (toward the palm rest). It runs locally, includes a working reference model, and provides guided recording tools for further experiments. It uses the browser's mono microphone stream, not separate access to the MacBook's physical microphones.
 
-Developed on the **left speaker grille of a 14-inch M3 Pro MacBook Pro**. The owner described the current preview as “very usable” in live testing. Other people, laptops, microphone settings, and environments have not been validated. This is a research prototype; it displays gestures and does not trigger system actions.
+Developed on the **left speaker grille of a 14-inch M3 Pro MacBook Pro**. Other people, laptops, microphone settings, and environments have not been validated. This is a research prototype; it displays gestures and does not trigger system actions.
 
 ## Quick start
 
 Requirements: macOS for the intended hardware interaction, **Python 3.14** (the verified environment), and a browser with microphone access and AudioWorklet support, such as Chrome or Safari. Node.js is only needed for developer checks.
 
-Download or clone this repository, open a terminal in its folder, and run:
+Clone the repository and install the local runtime:
 
 ```sh
+git clone https://github.com/Twis06/swipe.git
+cd swipe
 python3.14 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -27,7 +29,7 @@ Open **[localhost:8765/preview](http://localhost:8765/preview)** and keep the se
 4. Make one swipe at a time, lift your finger to return, and wait for the result. Keep music off for the first trial.
 5. **Stop listening** releases the microphone. Hiding or leaving the page also stops the preview.
 
-The bundled model files are small and already included; no training or private recordings are required to try the preview. After setup, macOS users can also double-click `Start Grille Lab.command`.
+The bundled model files are small and already included; no training or private recordings are required to try the preview. After setup, macOS users can also double-click `Start Swipe.command`.
 
 ## What is included
 

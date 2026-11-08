@@ -192,7 +192,7 @@ def main():
                          'Cross-take neighbors use the same feature space as direction templates, so agreement is not independent evidence.',
                          'The three takes lack verified direction labels; no alternating labels or pseudo-label training.']}
     (OUT/'report.json').write_text(json.dumps(report, indent=2)+'\n')
-    os.environ.setdefault('MPLCONFIGDIR', '/tmp/grille-lab-matplotlib')
+    os.environ.setdefault('MPLCONFIGDIR', '/tmp/swipe-matplotlib')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
