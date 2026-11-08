@@ -1,0 +1,27 @@
+{
+  "status": "Experimental preview, no system actions",
+  "feature_input": "raw",
+  "neighbors": 3,
+  "radius": 4,
+  "margin_threshold": 0.2,
+  "sessions": [
+    "20261103T165139_cf7201",
+    "20261103T200050_87dcb0"
+  ],
+  "training_clips": 56,
+  "selection_scores": {
+    "raw_k1": 34,
+    "raw_k3": 37,
+    "soft_polarity_k1": 30,
+    "soft_polarity_k3": 30,
+    "polarity_k1": 30,
+    "polarity_k3": 31
+  },
+  "model_sha256": "8e9a8e5e3c80837e3a33c276b6a2b2cec38fc186dc303fa094ad05e7040d2489",
+  "implementation_sha256": {
+    "swipe/gesture_model.py": "09eaca6aeb1ce95fd0a9ea15770fcd4f69cd96014f688ce32be49194341e1573",
+    "swipe/preview_model.py": "c02774fe5b1dc115de57c7e9c376deea5a215dcff0d43a96a8723496b1885a5c",
+    "swipe/paths.py": "b9a2cd458b4faa0f316dd096449a0e5e6dd758615e50fde7e472ccf5b6a7b139"
+  },
+  "limits": "No unused evaluation session remains. Preview feedback is transient and is not model training."
+}

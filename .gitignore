@@ -3,26 +3,21 @@
 /checkpoints/
 /docs/local/
 
-# Publish only the three runtime banks and selected evaluation evidence.
-/diagnostics/**
-!/diagnostics/preview/
-!/diagnostics/preview/model.npz
-!/diagnostics/preview/model.json
-!/diagnostics/preview/engine.json
-!/diagnostics/aligned_preview/
-!/diagnostics/aligned_preview/model.npz
-!/diagnostics/aligned_preview/model.json
-!/diagnostics/mfcc_preview/
-!/diagnostics/mfcc_preview/model.npz
-!/diagnostics/mfcc_preview/model.json
-!/diagnostics/mfcc_preview/benchmark.json
-!/diagnostics/mfcc_preview/benchmark_plan.json
-!/diagnostics/mfcc_preview/fallback_checks/
-!/diagnostics/mfcc_preview/fallback_checks/report.json
-!/diagnostics/mfcc_preview/fallback_checks/plan.json
-!/diagnostics/mfcc_preview/replay_fallback/
-!/diagnostics/mfcc_preview/replay_fallback/report.json
-!/diagnostics/mfcc_preview/replay_fallback/plan.json
+# Generated research artifacts stay local; published evidence lives in docs/evaluation.
+/diagnostics/
+
+# Only reviewed runtime model files belong in Git.
+/models/**
+!/models/preview/
+!/models/preview/model.npz
+!/models/preview/model.json
+!/models/preview/engine.json
+!/models/aligned_preview/
+!/models/aligned_preview/model.npz
+!/models/aligned_preview/model.json
+!/models/mfcc_preview/
+!/models/mfcc_preview/model.npz
+!/models/mfcc_preview/model.json
 
 # Local environments, tooling, secrets, and exports.
 __pycache__/

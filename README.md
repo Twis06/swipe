@@ -18,7 +18,7 @@ cd swipe
 python3.14 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python server.py
+python -m swipe
 ```
 
 Open **[localhost:8765/preview](http://localhost:8765/preview)** and keep the server running.
@@ -40,6 +40,20 @@ The bundled model files are small and already included; no training or private r
 | `/continuous` | Fifteen-second cued or free movement | WAV + prompt timeline under `data/` |
 
 The recording-only server works with the Python standard library. The preview additionally needs NumPy and SciPy. The browser uses plain HTML/CSS/JavaScript; there is no frontend build step, npm dependency, or hosted inference service.
+
+## Project layout
+
+```text
+swipe/              Python application and recognition code
+web/                Browser pages, styles, scripts, and active audio worklets
+models/             Bundled reference banks and integrity manifests
+research/           Offline experiments, replay tools, and prototype worklets
+tests/              Python regressions and JavaScript capture/client tests
+scripts/            Portable test and release-check commands
+docs/               Model card, recording guide, design notes, and evaluation reports
+```
+
+Run commands from the checkout root. Local `data/`, `diagnostics/`, and `checkpoints/` folders hold recordings, generated experiments, and saved baselines; Git excludes them. Published evidence lives under `docs/evaluation/`, separate from generated outputs. The app uses `python -m swipe`; it does not need an editable install or a `PYTHONPATH` setting.
 
 ## How recognition works
 
@@ -74,7 +88,7 @@ See the [model card](docs/MODEL_CARD.md) for calibration, failure modes, provena
 
 ## Collecting data and contributing
 
-See [recording instructions](docs/RECORDING.md) for the pilot and continuous workflows. Collecting clips does **not** automatically update the preview model. Research scripts and historical dataset-dependent tests remain available, but their original private dataset and intermediate caches are not distributed.
+See [recording instructions](docs/RECORDING.md) for the pilot and continuous workflows. Collecting clips does **not** automatically update the preview model. Research scripts in `research/` and historical dataset-dependent tests in `tests/` remain available, but their original private dataset and intermediate caches are not distributed.
 
 Run the portable checks with Python dependencies installed and **Node.js 22+** available:
 
@@ -93,7 +107,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the code map, research dependencies, 
 - **Frequent Uncertain results:** check the microphone and swipe location, keep music off, and try isolated swipes at a natural pace. The bundled bank may not transfer to your setup.
 - **High input peaks:** Float32 audio can exceed ±1 without encoder clipping. A red possible-clipping warning differs from an amber high-level notice; see the recording guide.
 - **Preview unavailable:** run the server with the virtual environment's Python and install `requirements.txt`. A checksum failure means the model or inference code differs from its manifest; restore a matching version rather than bypassing verification.
-- **Port already in use:** stop the previous server, or use `python server.py --port 8766` and open that port instead.
+- **Port already in use:** stop the previous server, or use `python -m swipe --port 8766` and open that port instead.
 
 ## Privacy and license
 

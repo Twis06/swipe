@@ -6,13 +6,13 @@ An experimental local preview for isolated up/down finger swipes on the left spe
 
 ## Bundled artifacts
 
-The active engine is `mfcc8_fallback` in [`diagnostics/preview/engine.json`](../diagnostics/preview/engine.json).
+The active engine is `mfcc8_fallback` in [`models/preview/engine.json`](../models/preview/engine.json).
 
 | Artifact | Role |
 | --- | --- |
-| `diagnostics/mfcc_preview/model.npz` | 60 MFCC8 swipe references, novelty cutoff, and copied gate parameters |
-| `diagnostics/preview/model.npz` | Original spectral reference bank and gate |
-| `diagnostics/aligned_preview/model.npz` | Legacy-encoding reference bank used by the old fallback |
+| `models/mfcc_preview/model.npz` | 60 MFCC8 swipe references, novelty cutoff, and copied gate parameters |
+| `models/preview/model.npz` | Original spectral reference bank and gate |
+| `models/aligned_preview/model.npz` | Legacy-encoding reference bank used by the old fallback |
 
 Adjacent JSON manifests record reference provenance and SHA-256 hashes. NumPy banks contain derived feature templates, labels, and parameters, not raw WAV audio. These are examples derived from one contributor's recordings, not a broadly trained population model. Reference session IDs and clip filenames remain in the manifests/reports for provenance. Original session metadata, device identifiers, raw audio, intermediate caches, and complete local checkpoints are excluded from Git.
 
@@ -32,11 +32,11 @@ The capture cascade may submit an early isolated event after at least 200 ms and
 
 Three built-in-microphone sessions contain 60 isolated swipes and 24 idle/typing negatives. The first used saturated PCM16 encoding; later sessions preserve Float32 samples. A separate headset-microphone session was excluded. Continuous takes include a mixture of contact reversals and lifted returns, without reliable direction timing, so they are not used for accuracy claims.
 
-The [reference-excluded check](../diagnostics/mfcc_preview/fallback_checks/report.json) reported 49 correct accepted swipes, 1 wrong accepted swipe, 10 rejected swipes, and 0/24 background activations. The earlier matcher had 37 correct, 1 wrong, and 22 rejected. Gates and MFCC reference calibration exclude the query session; a reused legacy cutoff remains a limitation. Feature choice and fallback policy followed inspection of these same recordings. See the [check plan](../diagnostics/mfcc_preview/fallback_checks/plan.json).
+The [reference-excluded check](../docs/evaluation/mfcc_preview/fallback_checks/report.json) reported 49 correct accepted swipes, 1 wrong accepted swipe, 10 rejected swipes, and 0/24 background activations. The earlier matcher had 37 correct, 1 wrong, and 22 rejected. Gates and MFCC reference calibration exclude the query session; a reused legacy cutoff remains a limitation. Feature choice and fallback policy followed inspection of these same recordings. See the [check plan](../docs/evaluation/mfcc_preview/fallback_checks/plan.json).
 
-The [stateful replay](../diagnostics/mfcc_preview/replay_fallback/report.json) preserved all previously correct accepted clips under both tested lead-ins. With repeated recorded background it produced 59/60 correct accepted directions, no wrong accepted directions, and no background activations. With zero lead-in it produced 50/60 correct accepted directions. References include these recordings, so these are integration checks, not held-out accuracy. The report's `raw` baseline key denotes the previous selective matcher. Replay assumes immediate acknowledgements and pauses signal time during inference.
+The [stateful replay](../docs/evaluation/mfcc_preview/replay_fallback/report.json) preserved all previously correct accepted clips under both tested lead-ins. With repeated recorded background it produced 59/60 correct accepted directions, no wrong accepted directions, and no background activations. With zero lead-in it produced 50/60 correct accepted directions. References include these recordings, so these are integration checks, not held-out accuracy. The report's `raw` baseline key denotes the previous selective matcher. Replay assumes immediate acknowledgements and pauses signal time during inference.
 
-The [paired benchmark](../diagnostics/mfcc_preview/benchmark.json) measured 252 calls per engine: 7.01 ms median / 8.59 ms p95 for the current system, versus 6.77 / 8.22 ms previously. It includes gate and fallback computation, but excludes WAV decoding, capture, HTTP, and rendering. See the [benchmark plan](../diagnostics/mfcc_preview/benchmark_plan.json).
+The [paired benchmark](../docs/evaluation/mfcc_preview/benchmark.json) measured 252 calls per engine: 7.01 ms median / 8.59 ms p95 for the current system, versus 6.77 / 8.22 ms previously. It includes gate and fallback computation, but excludes WAV decoding, capture, HTTP, and rendering. See the [benchmark plan](../docs/evaluation/mfcc_preview/benchmark_plan.json).
 
 ## Limits and reproducibility
 
@@ -48,3 +48,9 @@ The [paired benchmark](../diagnostics/mfcc_preview/benchmark.json) measured 252 
 - Research scripts need original recordings and intermediate experiment artifacts that are not shipped. Reports are provided for inspection; full result reproduction is not possible from the public checkout alone.
 
 Runtime files are hash-verified on load. Preserve the bank, manifest, and corresponding feature code together. The legacy rollback is available by setting the engine to `selective_encoding_fallback` and restarting the server; it uses the bundled old banks without fitting. New development should be compared against this saved usable baseline before replacing it.
+
+## Repository layout migration
+
+Application code now lives in `swipe/`, runtime banks in `models/`, browser assets in `web/`, and these saved reports in `docs/evaluation/`. The model arrays and calibration values were not changed. Runtime manifests were updated for the relocated source paths and import-only changes, and predictions were compared exactly on all 84 labeled development clips.
+
+Historical report bodies and plans retain their original path strings and source hashes as evidence of the runs that produced them. Those historical hashes are not the active runtime verification manifests. To reproduce an old frozen experiment byte-for-byte, use its saved checkpoint or the corresponding Git commit; do not rewrite its report or disable an integrity check.

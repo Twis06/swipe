@@ -11,22 +11,22 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-DIAGNOSTICS = {
-    'diagnostics/preview/engine.json',
-    'diagnostics/preview/model.json',
-    'diagnostics/preview/model.npz',
-    'diagnostics/aligned_preview/model.json',
-    'diagnostics/aligned_preview/model.npz',
-    'diagnostics/mfcc_preview/model.json',
-    'diagnostics/mfcc_preview/model.npz',
-    'diagnostics/mfcc_preview/benchmark.json',
-    'diagnostics/mfcc_preview/benchmark_plan.json',
-    'diagnostics/mfcc_preview/fallback_checks/plan.json',
-    'diagnostics/mfcc_preview/fallback_checks/report.json',
-    'diagnostics/mfcc_preview/replay_fallback/plan.json',
-    'diagnostics/mfcc_preview/replay_fallback/report.json',
+ARTIFACTS = {
+    'models/preview/engine.json',
+    'models/preview/model.json',
+    'models/preview/model.npz',
+    'models/aligned_preview/model.json',
+    'models/aligned_preview/model.npz',
+    'models/mfcc_preview/model.json',
+    'models/mfcc_preview/model.npz',
+    'docs/evaluation/mfcc_preview/benchmark.json',
+    'docs/evaluation/mfcc_preview/benchmark_plan.json',
+    'docs/evaluation/mfcc_preview/fallback_checks/plan.json',
+    'docs/evaluation/mfcc_preview/fallback_checks/report.json',
+    'docs/evaluation/mfcc_preview/replay_fallback/plan.json',
+    'docs/evaluation/mfcc_preview/replay_fallback/report.json',
 }
-PRIVATE_PARTS = {'data', 'checkpoints', '.venv', 'venv', '__pycache__',
+PRIVATE_PARTS = {'data', 'checkpoints', 'diagnostics', '.venv', 'venv', '__pycache__',
                  '.impeccable', '.codex', '.agents', 'node_modules'}
 PRIVATE_SUFFIXES = {'.wav', '.mp3', '.m4a', '.zip', '.gz', '.tar', '.pyc', '.pem', '.key'}
 SUSPICIOUS = re.compile(
@@ -53,9 +53,9 @@ def main():
                 or relative.suffix.lower() in PRIVATE_SUFFIXES or relative.name.startswith('.env')
                 or relative.name == '.DS_Store'):
             errors.append(f'Private/local artifact eligible for publication: {name}')
-        if name.startswith('diagnostics/') and name not in DIAGNOSTICS:
+        if (name.startswith('models/') or name.startswith('docs/evaluation/')) and name not in ARTIFACTS:
             errors.append(f'Unreviewed diagnostic artifact: {name}')
-        if relative.suffix == '.npz' and name not in DIAGNOSTICS:
+        if relative.suffix == '.npz' and name not in ARTIFACTS:
             errors.append(f'Unreviewed binary bank: {name}')
         if path.is_symlink():
             errors.append(f'Symlink needs explicit review: {name}')
@@ -73,13 +73,13 @@ def main():
             else:
                 if SUSPICIOUS.search(content):
                     errors.append(f'Personal path or credential pattern; inspect {name}')
-    required = DIAGNOSTICS | {'README.md', 'LICENSE', 'requirements.txt',
-                              'server.py', 'preview_service.py', '.github/workflows/ci.yml'}
+    required = ARTIFACTS | {'README.md', 'LICENSE', 'requirements.txt',
+                              'swipe/server.py', 'swipe/preview_service.py', 'swipe/__main__.py', 'swipe/paths.py', '.github/workflows/ci.yml'}
     errors.extend(f'Missing release file: {name}' for name in sorted(required - set(names)))
     if errors:
         raise SystemExit('\n'.join(errors))
     sys.path.insert(0, str(ROOT))
-    from preview_service import PreviewService
+    from swipe.preview_service import PreviewService
     service = PreviewService()  # Verifies bank and implementation hashes.
     if service.info()['recognizer'] != 'mfcc8_fallback':
         raise SystemExit('The release baseline must use mfcc8_fallback.')

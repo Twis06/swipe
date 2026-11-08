@@ -7,21 +7,28 @@ python scripts/check.py
 python scripts/check_release.py
 ```
 
-The explicit public suite avoids historical tests that depend on undistributed recordings or fit models. Do not use blanket unittest discovery as the public test command. Add portable regressions to `test_public_runtime.py` or register a new suite in `scripts/check.py`. Put temporary recordings in a temporary directory, not the real `data/` folder.
+The explicit public suite avoids historical tests that depend on undistributed recordings or fit models. Do not use blanket unittest discovery as the public test command. Add portable regressions to `tests/test_public_runtime.py` or register a new suite in `scripts/check.py`. Put temporary recordings in a temporary directory, not the real `data/` folder.
 
 ## Code map
 
-| Area | Files |
+| Area | Location |
 | --- | --- |
-| Local HTTP API and recording persistence | `server.py`, `continuous_recording.py`, `audio_format.py` |
-| Live UI and capture | `preview.html`, `preview.js`, `preview.css`, `cascade-preview-worklet.js` |
-| Guided / continuous collectors | `index.html`, `app.js`, `continuous.html`, `continuous.js`, `audio-worklet.js` |
-| Active inference | `preview_service.py`, `mfcc_preview.py`, `mfcc_fallback.py`, `mfcc_components.py`, `fast_preview.py` |
-| Shared features and legacy fallback | `gesture_model.py`, `preview_model.py`, `swipe_feature_families.py`, `selective_preview.py`, `aligned_preview.py` |
-| Runtime banks and provenance | Allowlisted files under `diagnostics/preview`, `diagnostics/aligned_preview`, `diagnostics/mfcc_preview` |
-| Research and data-dependent evaluation | Root `probe_*`, `compare_*`, `build_*`, `train_*`, `check_mfcc_*`, and related scripts |
+| Application entry point | `swipe/__main__.py` → `swipe/server.py`; run `python -m swipe` |
+| HTTP API, capture persistence, audio decoding | `swipe/server.py`, `swipe/continuous_recording.py`, `swipe/audio_format.py` |
+| Feature extraction and recognition | `swipe/preview_service.py`, `swipe/mfcc_preview.py`, `swipe/mfcc_fallback.py`, and supporting modules in `swipe/` |
+| Resource locations | `swipe/paths.py`; checkout-relative paths independent of request routing |
+| Browser application | `web/` (served through an explicit URL allowlist) |
+| Bundled reference banks and runtime manifests | `models/preview/`, `models/aligned_preview/`, `models/mfcc_preview/` |
+| Portable regression coverage | `tests/` and `tests/js/`; selected by `scripts/check.py` |
+| Offline experiments and old worklets | `research/` and `research/worklets/` |
+| Public evaluation evidence | `docs/evaluation/`; historical reports remain unchanged |
+| Local recordings / generated work / saved baselines | `data/`, `diagnostics/`, `checkpoints/` (all Git-ignored) |
 
-Research tools are retained in place to preserve historical paths and manifest hashes. For those tools, install `python -m pip install -r requirements-analysis.txt`. Many need the original local recordings and intermediate diagnostic files; installing dependencies alone does not make private-data experiments reproducible. Read each script before running it. Some write new model banks or require output folders not to exist.
+Keep application imports inside the `swipe` package. The runtime must not import experiments or tests. Tests and research can import runtime modules using `from swipe...`. Use explicit package imports; do not extend `sys.path` to revive the old flat layout. The standalone check scripts add the checkout root only when needed for direct execution.
+
+Research tools run as modules from the checkout root, for example `python -m research.recognize_clip --help`. Install their optional packages with `python -m pip install -r requirements-analysis.txt`. Most experiments need the original local recordings and intermediate diagnostics; installing dependencies alone does not make private-data results reproducible. See [research/README.md](research/README.md). Some scripts fit models, execute on import, or require output folders not to exist, so read them before running them.
+
+The application is currently run from its checkout rather than distributed as a wheel. `web/` and `models/` deliberately stay visible beside the source. `Start Swipe.command` launches the module from the correct directory.
 
 ## Model changes
 
@@ -31,7 +38,7 @@ The runtime checks SHA-256 hashes of banks and feature code. If changing these f
 
 ## Before publishing or opening a pull request
 
-Run both check commands and inspect `git diff --cached --stat` plus the staged diff. Do not force-add `data/`, `checkpoints/`, local notes, audio exports, credentials, or experiment caches. `.gitignore` allowlists only the runtime model banks and selected evidence from diagnostics. The release checker also rejects these excluded artifacts if they have already been staged/tracked.
+Run both check commands and inspect `git diff --cached --stat` plus the staged diff. Do not force-add `data/`, `checkpoints/`, local notes, audio exports, credentials, or experiment caches. `.gitignore` excludes generated diagnostics and allowlists the reviewed runtime banks in `models/`. Published evidence is kept separately in `docs/evaluation/`. The release checker also rejects these excluded artifacts if they have already been staged/tracked.
 
 Describe what changed, why, and which checks ran. Include setup, microphone, gesture method, and rejection behavior when reporting a recognition issue. Do not attach audio containing private speech or identifying session/device metadata to public issues.
 

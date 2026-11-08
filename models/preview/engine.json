@@ -1,0 +1,20 @@
+{
+  "engine": "mfcc8_fallback",
+  "changes": "MFCC8 primary with calibrated novelty rejection; previous selective matcher rescues uncertain results. Raw gates unchanged.",
+  "implementation_sha256": {
+    "swipe/fast_preview.py": "edb82a78d1f4fff52f18d9f6795514218cf01f36cce9b14c9b9860717cff26c8",
+    "swipe/audio_format.py": "da2534bc1f41d915ca9d1650626e6639dd3a4d8af82dc0ecbcf23a42f05e4b1f",
+    "swipe/selective_preview.py": "ab29728b4e32aa2ef7e90cb105537e86649438347be6092d78c581ddf9e2fece",
+    "swipe/preview_service.py": "94ce84e270ea392a921dcb3582044cce9d01b2529d4a2bc6200cadebc8da37c3",
+    "swipe/mfcc_fallback.py": "fed519e51a898560b089a6ba33c0864bc48d75591f4b7ac480e7686a79ce2c68",
+    "swipe/mfcc_preview.py": "6ffa6e8df977122cea9b97f30618d8ef03ea067846c09c23704bbaed526ff07c",
+    "swipe/paths.py": "b9a2cd458b4faa0f316dd096449a0e5e6dd758615e50fde7e472ccf5b6a7b139"
+  },
+  "validation": [
+    "docs/evaluation/mfcc_preview/fallback_checks/report.json",
+    "docs/evaluation/mfcc_preview/replay_fallback/report.json",
+    "docs/evaluation/mfcc_preview/benchmark.json"
+  ],
+  "aligned_model": "models/aligned_preview/model.npz",
+  "rollback_engine": "selective_encoding_fallback"
+}
