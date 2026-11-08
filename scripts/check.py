@@ -7,6 +7,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON_TESTS = [
+    'tests.test_key_bindings',
     'tests.test_public_runtime.PublicRuntimeTests',
     'tests.test_public_runtime.PublicEndpointTests',
     'tests.test_continuous',
@@ -24,6 +25,7 @@ PYTHON_TESTS = [
     'tests.test_mfcc_preview.MFCCPreviewTests.test_changed_model_is_refused',
 ]
 JAVASCRIPT_TESTS = [
+    'tests/js/test_key_bindings.cjs',
     'tests/js/test_audio.cjs',
     'tests/js/test_continuous.cjs',
     'tests/js/test_microphone_guard.cjs',

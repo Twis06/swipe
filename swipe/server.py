@@ -17,12 +17,14 @@ from pathlib import Path
 from urllib.parse import unquote
 from swipe.continuous_recording import save_take
 from swipe.paths import ROOT, WEB_DIR
+from swipe.key_bindings import KeyBindings
 
 DATA = ROOT / 'data'
 TOKEN = secrets.token_urlsafe(32)
 LOCK = threading.Lock()
 PREVIEW_LOCK = threading.Lock()
 PREVIEW = None
+KEYS = KeyBindings()
 LABELS = {'up', 'down', 'idle', 'typing'}
 
 def preview():
@@ -76,7 +78,7 @@ class Handler(BaseHTTPRequestHandler):
         path = self.path.split('?')[0]
         files = {'/': 'index.html', '/app.js': 'app.js', '/audio-worklet.js': 'audio-worklet.js', '/style.css': 'style.css',
                  '/preview': 'preview.html', '/preview.js': 'preview.js', '/preview.css': 'preview.css', '/preview-worklet.js': 'cascade-preview-worklet.js',
-                 '/continuous':'continuous.html','/continuous.js':'continuous.js'}
+                 '/continuous':'continuous.html','/continuous.js':'continuous.js', '/key-bindings.js':'key-bindings.js'}
         if path in files:
             name = files[path]
             mime = 'text/html' if name.endswith('html') else 'text/css' if name.endswith('css') else 'text/javascript'
@@ -88,9 +90,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, {'token': TOKEN, 'sessions': sessions, 'data_directory': str(DATA)})
         if path == '/api/preview':
             try:
-                return self.send(200, {**preview().info(), 'token': TOKEN})
+                return self.send(200, {**preview().info(), 'token': TOKEN, 'system_actions': KEYS.status()['enabled']})
             except RuntimeError as exc:
                 return self.send(503, {'error': str(exc)})
+        if path == '/api/keys':
+            return self.send(200, KEYS.status(self.headers.get('X-Swipe-Client', '')))
         match = re.fullmatch(r'/api/export/([a-zA-Z0-9_-]+)', path)
         if match:
             folder = DATA / match[1]
@@ -113,6 +117,20 @@ class Handler(BaseHTTPRequestHandler):
             if not 0 < length < (12_000_000 if continuous else 2_000_000):
                 raise ValueError('Invalid request size.')
             body = self.rfile.read(length)
+            if self.path == '/api/keys':
+                payload = json.loads(body)
+                try:
+                    return self.send(200, KEYS.configure(payload['action'], payload['client'], payload.get('bindings')))
+                except PermissionError as exc:
+                    return self.send(403, {'error': str(exc)})
+            if self.path == '/api/keys/fire':
+                payload = json.loads(body)
+                try:
+                    return self.send(200, KEYS.fire(payload['ticket'], payload['client']))
+                except PermissionError as exc:
+                    return self.send(403, {'error': str(exc)})
+                except RuntimeError as exc:
+                    return self.send(503, {'error': str(exc)})
             if continuous:
                 metadata=self.headers.get('X-Recording-Metadata','')
                 if len(metadata)>16000:raise ValueError('Recording metadata is too large.')
@@ -122,7 +140,11 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send(201,save_take(DATA,continuous[1],body,payload,now()))
             if self.path == '/api/predict':
                 try:
-                    return self.send(200, preview().classify(body))
+                    result = preview().classify(body)
+                    ticket = KEYS.offer(result, self.headers.get('X-Swipe-Client', ''))
+                    if ticket:
+                        result = {**result, 'action_ticket': ticket}
+                    return self.send(200, result)
                 except RuntimeError as exc:
                     return self.send(503, {'error': str(exc)})
                 except BlockingIOError as exc:

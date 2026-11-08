@@ -12,6 +12,14 @@
   </div>
   <div class="mic-row"><span id="micName">Microphone disconnected</span><meter id="previewLevel" min="-90" max="0" value="-90" aria-label="Microphone peak level"></meter><span id="peakText">— dBFS</span></div>
   <div class="actions"><button class="primary" id="startPreview" disabled>Start preview</button><button id="stopPreview" disabled>Stop listening</button></div>
+  <section class="key-mapping" aria-labelledby="keyTitle">
+    <div class="section-heading"><h2 id="keyTitle">Your swipes. Your keys.</h2><span id="keyState" data-enabled="false">Keys off</span></div>
+    <div class="binding-row"><span>Swipe up <small>toward the screen</small></span><button id="bindUp" class="keycap" type="button">↑</button></div>
+    <div class="binding-row"><span>Swipe down <small>toward the palm rest</small></span><button id="bindDown" class="keycap" type="button">↓</button></div>
+    <div class="key-actions"><button id="enableKeys" type="button" disabled>Enable keys</button><button id="keyPermission" class="text-button" type="button" hidden>Allow macOS access</button></div>
+    <p id="keyNotice" class="setup-note" role="status">Key output starts off. Choose a key or shortcut for each direction.</p>
+  </section>
+
   <p id="previewNotice" role="status">Checking the local model…</p>
   <section class="recordings" aria-labelledby="recentTitle"><div class="section-heading"><h2 id="recentTitle">Recent results</h2><button class="text-button" id="clearHistory" disabled>Clear results</button></div><p id="historyEmpty">Your swipes will appear here while the preview is running.</p><ol id="predictionHistory"></ol></section>
 </section><aside>
@@ -19,7 +27,7 @@
   <label for="previewDevice">Microphone</label><select id="previewDevice"><option value="">System default — use built-in mic</option></select>
   <p class="setup-note">Use the MacBook’s built-in microphone. Keep the laptop on the same surface as your recordings.</p>
   <div class="how"><h2>One swipe at a time</h2><ol><li>Keep still for one second after starting.</li><li><strong>Up</strong> is toward the screen. <strong>Down</strong> is toward the palm rest.</li><li>Lift your finger and wait for the result before the next swipe.</li></ol><p>Allow about a second for each result. An uncertain result means the sound did not match clearly enough.</p></div>
-  <details><summary>What this preview does</summary><p>Audio is processed by the server on this Mac. Preview audio and results are not saved to disk, and no shortcuts or system actions run.</p><p id="modelDescription">Loading the model description…</p><p>This is an experiment using your two recording sessions. It has not been validated for everyday use, speech, music, or other background sounds.</p><p>Stopping, leaving this page, or switching to another tab releases the microphone. Recording sessions remain available in the collector.</p></details>
+  <details><summary>What this preview does</summary><p>Audio is processed by the server on this Mac. Preview audio and results are not saved to disk, and keys are sent only when you explicitly enable key output.</p><p id="modelDescription">Loading the model description…</p><p>This is an experiment using three recording sessions. It has not been validated for everyday use, speech, music, or other background sounds.</p><p>Stop listening or closing this page releases the microphone and disables keys. When keys are enabled, listening continues while you switch to another app; otherwise hiding the page stops it. Recording sessions remain available in the collector.</p></details>
 </aside></div>
-<footer>Local prediction only. Use Stop listening whenever you want to release the microphone.</footer>
-</main><script src="/preview.js"></script></body></html>
+<footer>Local recognition. Keys are opt-in. Stop listening releases the microphone and disables key output.</footer>
+</main><script src="/key-bindings.js"></script><script src="/preview.js"></script></body></html>

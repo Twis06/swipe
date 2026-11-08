@@ -43,6 +43,8 @@ function drawHistory() {
 }
 async function stop(message='Microphone released. Start again whenever you’re ready.') {
   generation++;active=false;starting=false;clearTimeout(resultTimer);
+  window.swipeKeys?.setListening(false);
+  void window.swipeKeys?.stop();
   request?.abort();request=null;
   queuedFallback=null;acceptedCaptureId=null;
   recorder?.port.postMessage({type:'stop'});recorder?.disconnect();recorder=null;
@@ -71,7 +73,7 @@ async function predictCandidate(pcm, rate, epoch, windowStart=0, captureId=null,
   const controller=new AbortController();request=controller;
   const timeout=setTimeout(()=>controller.abort(),6000);
   try {
-    const response=await fetch('/api/predict',{method:'POST',headers:{'Content-Type':'audio/wav','X-Recorder-Token':token},body:wav(pcm,rate),signal:controller.signal});
+    const response=await fetch('/api/predict',{method:'POST',headers:{'Content-Type':'audio/wav','X-Recorder-Token':token,'X-Swipe-Client':window.swipeKeys?.client||''},body:wav(pcm,rate),signal:controller.signal});
     const result=await response.json();if(!response.ok)throw new Error(result.error||'Prediction failed.');
     if(!active || epoch!==generation)return;
     if(phase==='early'){
@@ -85,7 +87,9 @@ async function predictCandidate(pcm, rate, epoch, windowStart=0, captureId=null,
     if(overlapsPreviousEvent(result,windowStart,rate)){show('listening','Listening for a swipe','That swipe was already checked. Wait a moment, then try the next one.');return;}
     const label=result.prediction==='up'?'Up':result.prediction==='down'?'Down':'Uncertain';
     const detail=result.prediction==='up'?'Toward the screen.':result.prediction==='down'?'Toward the palm rest.':result.reason==='unfamiliar_sound'?'That sound did not match the recorded swipes closely enough.':'The sound matched both directions too closely.';
-    show(result.prediction,label,detail);
+    const sentKey=await window.swipeKeys?.accepted(result,()=>active && epoch===generation);
+    if(!active || epoch!==generation)return;
+    show(result.prediction,label,sentKey ? `Sent ${sentKey} to the active app.` : detail);
     history.unshift({label,time:new Date()});history=history.slice(0,6);drawHistory();
     notice('Lift your finger, wait a moment, then try the next swipe.');
     resultTimer=setTimeout(()=>{if(active && generation===epoch)show('listening','Listening for a swipe','One movement, then wait for the result.');},5000);
@@ -118,7 +122,7 @@ async function start() {
     recorder=new AudioWorkletNode(localContext,'gesture-preview',{channelCount:1,channelCountMode:'explicit'});
     mute=localContext.createGain();mute.gain.value=0;
     localContext.createMediaStreamSource(stream).connect(recorder);recorder.connect(mute);mute.connect(localContext.destination);
-    active=true;starting=false;track.onended=()=>stop('Microphone disconnected. Start again to reconnect.');
+    active=true;starting=false;window.swipeKeys?.setListening(true);track.onended=()=>stop('Microphone disconnected. Start again to reconnect.');
     el('micName').textContent=track.label||'Microphone connected';el('listenState').textContent='Checking background';
     show('listening','Keep still for one second','The preview is measuring the background sound.');
     let warmed=false;
@@ -136,6 +140,6 @@ async function start() {
 }
 el('startPreview').onclick=start;el('stopPreview').onclick=()=>stop();
 el('clearHistory').onclick=()=>{history=[];drawHistory();};
-document.addEventListener('visibilitychange',()=>{if(document.hidden && (active||starting))stop('Preview stopped when this tab became hidden. Start again when ready.');});
+document.addEventListener('visibilitychange',()=>{if(document.hidden && (active||starting) && !window.swipeKeys?.isArmed())stop('Preview stopped when this tab became hidden. Start again when ready.');});
 window.addEventListener('pagehide',()=>{if(active||starting)stop();});
-(async()=>{try{const response=await fetch('/api/preview');const info=await response.json();if(!response.ok)throw new Error(info.error||'Local model unavailable.');token=info.token;modelReady=info.ready;el('modelDescription').textContent=`The experimental recognizer uses ${info.reference_swipes ?? info.training_clips} ${info.reference_swipes ? 'swipe examples' : 'clips'} from ${info.training_sessions} recording sessions. No confidence percentage is shown because its scores are not calibrated probabilities.`;notice('Ready. Start the preview when your finger is in position.');await devices();}catch(error){notice(error.message,true);el('modelDescription').textContent='The local model is unavailable.';show('error','Model unavailable','Restart Swipe with its analysis environment, then reload this page.');}finally{controls();}})();
+(async()=>{try{const response=await fetch('/api/preview');const info=await response.json();if(!response.ok)throw new Error(info.error||'Local model unavailable.');token=info.token;modelReady=info.ready;await window.swipeKeys?.configure(token);el('modelDescription').textContent=`The experimental recognizer uses ${info.reference_swipes ?? info.training_clips} ${info.reference_swipes ? 'swipe examples' : 'clips'} from ${info.training_sessions} recording sessions. No confidence percentage is shown because its scores are not calibrated probabilities.`;notice('Ready. Start the preview when your finger is in position.');await devices();}catch(error){notice(error.message,true);el('modelDescription').textContent='The local model is unavailable.';show('error','Model unavailable','Restart Swipe with its analysis environment, then reload this page.');}finally{controls();}})();

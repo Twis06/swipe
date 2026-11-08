@@ -4,7 +4,7 @@
 
 Swipe listens through the built-in microphone and recognizes **Up** (toward the screen) and **Down** (toward the palm rest). It runs locally, includes a working reference model, and provides guided recording tools for further experiments. It uses the browser's mono microphone stream, not separate access to the MacBook's physical microphones.
 
-Developed on the **left speaker grille of a 14-inch M3 Pro MacBook Pro**. Other people, laptops, microphone settings, and environments have not been validated. This is a research prototype; it displays gestures and does not trigger system actions.
+Developed on the **left speaker grille of a 14-inch M3 Pro MacBook Pro**. Other people, laptops, microphone settings, and environments have not been validated. This is a research prototype; it displays gestures and can optionally send mapped keys to the active macOS app. Key output is off by default and requires Accessibility permission.
 
 ## Quick start
 
@@ -114,3 +114,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the code map, research dependencies, 
 Audio goes from the browser to a server bound to `127.0.0.1`. The app does not send it to an external service. Recorders write files locally; live prediction does not. Cloud-sync or backup software may separately upload files if you place the project in a synced folder. See [SECURITY.md](SECURITY.md) for the local-only scope.
 
 [MIT](LICENSE), including the bundled project-owned reference model artifacts. Dependencies retain their own licenses.
+
+### Map swipes to keys (macOS)
+
+In the live preview, click each keycap and press the desired key or shortcut. Allow the app running Swipe under **System Settings → Privacy & Security → Accessibility**, start listening, then click **Enable keys**. Switch to your target app: accepted swipes send its mapped key. Keys begin disabled on every reload. **Disable keys** keeps recognition running; **Stop listening** disables output and releases the microphone. Close the tab to stop. If the page loses contact, the server disarms after 20 seconds.
+
+Only accepted gestures can receive short-lived, single-use action tickets. Uncertain sounds do not send keys. Mappings use physical key positions (browser KeyboardEvent.code); non-US keyboard layouts may label those positions differently. A first test with arrow keys in a scratch document is recommended.

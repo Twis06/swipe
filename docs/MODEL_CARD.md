@@ -2,7 +2,7 @@
 
 ## Intended use
 
-An experimental local preview for isolated up/down finger swipes on the left speaker grille of a 14-inch M3 Pro MacBook Pro, using its built-in microphone. The preview displays a direction or rejects an uncertain sound. It is not connected to system actions. The user's positive live-usability report on 2026-11-07 is qualitative feedback, not a measured accuracy result.
+An experimental local preview for isolated up/down finger swipes on the left speaker grille of a 14-inch M3 Pro MacBook Pro, using its built-in microphone. The preview displays a direction or rejects an uncertain sound. Optional macOS key output can map accepted directions to user-selected keys or shortcuts. It is disabled by default and does not change the recognition model. The user's positive live-usability report on 2026-11-07 is qualitative feedback, not a measured accuracy result.
 
 ## Bundled artifacts
 

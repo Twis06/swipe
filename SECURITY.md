@@ -7,3 +7,5 @@ Live preview audio and predictions stay in process memory and are not added to t
 Only use trusted model/source files. Model hashes detect inconsistent files, not malicious changes by someone able to edit both files and manifests. The runtime loads NumPy banks with `allow_pickle=False`.
 
 For a security report, use GitHub's private vulnerability reporting if enabled on the repository. Otherwise contact the repository owner privately before posting sensitive details. Do not put credentials, private recordings, or device metadata in public issue attachments.
+
+macOS keyboard output is opt-in and requires Accessibility permission. Only accepted predictions can mint a three-second, single-use ticket owned by the armed browser tab. Keys have a 350ms cooldown and a 20-second heartbeat lease. Stop and page exit disarm output; network failure can leave a lease alive until it expires. This limits accidental repeats, but gesture recognition remains experimental: choose bindings appropriate for occasional mistakes. No arbitrary shell commands are accepted.
