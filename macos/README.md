@@ -34,7 +34,7 @@ Every launch begins paused. Mappings and volume step are saved in macOS preferen
 
 - `SwipeCore/GestureCapture.swift`: port of the released 128-frame early/fallback capture logic. Synthetic parity fixtures compare exact PCM hashes, frame origins, and emission times against the browser worklet at 44.1/48 kHz.
 - `SwipeCore/EventGate`: accepted-result and duplicate-event gate.
-- `SwipeApp/Microphone.swift`: native AVAudioEngine, built-in input selection, 128-frame reblocking, first-second warmup, rate/device validation.
+- `SwipeApp/Microphone.swift`: dedicated Audio Queue input pinned to the built-in device UID, 48 kHz mono Float32 capture, 128-frame reblocking, first-second warmup, and a delivered-frame watchdog. It does not route microphone audio through an output engine or change system defaults.
 - `SwipeApp/Recognizer.swift`: bounded one-request stdin/stdout bridge, timeout/exit handling, stale result protection via controller generation.
 - `swipe/native_worker.py`: original `PreviewService` and model verification over private stdin/stdout; reads local models, with no network listener, audio recordings, or training.
 - `SwipeApp/SystemActions.swift`: native action dispatch with required OS permissions.
