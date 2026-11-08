@@ -1,0 +1,6 @@
+{
+  "calls": 252,
+  "repeats": 3,
+  "order": "paired randomized;seed872",
+  "scope": "Full prediction including raw gate and conditional fallback; excludes WAV decoding, HTTP and capture."
+}

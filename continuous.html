@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Grille Lab — 15-second recording</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/preview.css"></head>
+<body><main>
+<header><a class="brand" href="/">Grille Lab<span> / acoustic gestures</span></a><nav aria-label="Grille Lab"><a href="/">Short clips</a><a href="/continuous" aria-current="page">15-second recording</a><a href="/preview">Live preview</a></nav></header>
+<div class="layout"><section aria-labelledby="title">
+<h1 id="title">Keep sliding. <br>Capture the whole sequence.</h1>
+<p class="intro">One continuous 15-second recording of up and down swipes, including the sound between movements.</p>
+<div class="stage" id="stage" data-phase="ready"><div class="stage-top"><span id="phase">Microphone off</span><span id="timeLeft">15 seconds</span></div><div id="gestureIcon" aria-hidden="true"><svg viewBox="0 0 100 120"><path d="M50 26v68M30 46l20-20 20 20M30 74l20 20 20-20"/></svg></div><div role="status" aria-live="polite" aria-atomic="true"><h2 id="cue">Ready when you are</h2><p id="instruction">Press Start, then get your finger in position during the countdown.</p></div><div class="trial-timeline"><div id="trialFill"></div></div></div>
+<div class="mic-row"><span id="micStatus">Microphone disconnected</span><span id="level">— dBFS</span></div>
+<div class="actions"><button id="start" class="primary" disabled>Start 15-second recording</button><button id="cancel" disabled>Cancel take</button></div>
+<p id="notice" role="status">Connecting to the local recorder…</p>
+<section class="recordings"><div class="section-heading"><h2>Saved take</h2><a id="export" hidden>Download recording ZIP</a></div><p id="saved">No continuous take recorded yet.</p></section>
+</section><aside><h2>Set up your take</h2><label for="device">Microphone</label><select id="device"><option value="">System default — use built-in mic</option></select>
+<label for="mode">Movement</label><select id="mode"><option value="cued">Follow alternating cues</option><option value="free">Free up/down at my own pace</option></select>
+<label for="notes">Notes <span>(optional)</span></label><textarea id="notes" rows="2" placeholder="e.g. same middle finger, lighter pressure"></textarea>
+<div class="how"><h2>Keep moving naturally</h2><ol><li>Use the same stretch of the left speaker grille.</li><li><strong>Up</strong> is toward the screen. <strong>Down</strong> is toward the palm rest.</li><li>Follow the arrow every 1.5 seconds, or choose free movement to use your own pace.</li></ol><p>The recording runs continuously and stops after 15 seconds. Cues are silent; keep speakers quiet.</p></div>
+<details><summary>How this data is saved</summary><p>One raw float WAV and its prompt timeline are saved locally. Prompt times describe what was shown, not verified gesture timing. Free movement is saved as an unlabeled up/down sequence for later review.</p><p>The microphone disconnects when recording finishes or you cancel. Hiding this tab cancels an unfinished take. A failed save can be retried while the finished audio remains in memory.</p><p>If this folder is inside a cloud-synced directory, your sync provider may upload saved recordings.</p></details>
+</aside></div><footer>Continuous capture for timing, reversals, and variation. Directions will be checked before training.</footer>
+</main><script src="/continuous.js"></script></body></html>

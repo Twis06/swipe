@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Grille Lab — live preview</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/preview.css"></head>
+<body><main>
+<header><a class="brand" href="/">Grille Lab<span> / acoustic gestures</span></a><nav aria-label="Grille Lab"><a href="/">Collect recordings</a><a href="/continuous">15s recording</a><a href="/preview" aria-current="page">Live preview</a></nav></header>
+<div class="layout"><section aria-labelledby="title">
+  <h1 id="title">Try a swipe. <br>See what it hears.</h1>
+  <p class="intro">Slide along the left speaker grille. The preview will show a direction or leave an uncertain sound unassigned.</p>
+  <div class="stage preview-stage" id="resultStage" data-result="ready">
+    <div class="stage-top"><span id="listenState">Microphone off</span><span>Experimental preview</span></div>
+    <div id="resultIcon" aria-hidden="true"><svg viewBox="0 0 100 120"><path d="M50 26v68M30 46l20-20 20 20M30 74l20 20 20-20"/></svg></div>
+    <div role="status" aria-live="polite" aria-atomic="true"><h2 id="result">Ready when you are</h2><p id="resultDetail">Start the preview, then keep still for one second.</p></div>
+  </div>
+  <div class="mic-row"><span id="micName">Microphone disconnected</span><meter id="previewLevel" min="-90" max="0" value="-90" aria-label="Microphone peak level"></meter><span id="peakText">— dBFS</span></div>
+  <div class="actions"><button class="primary" id="startPreview" disabled>Start preview</button><button id="stopPreview" disabled>Stop listening</button></div>
+  <p id="previewNotice" role="status">Checking the local model…</p>
+  <section class="recordings" aria-labelledby="recentTitle"><div class="section-heading"><h2 id="recentTitle">Recent results</h2><button class="text-button" id="clearHistory" disabled>Clear results</button></div><p id="historyEmpty">Your swipes will appear here while the preview is running.</p><ol id="predictionHistory"></ol></section>
+</section><aside>
+  <h2>Set up the preview</h2>
+  <label for="previewDevice">Microphone</label><select id="previewDevice"><option value="">System default — use built-in mic</option></select>
+  <p class="setup-note">Use the MacBook’s built-in microphone. Keep the laptop on the same surface as your recordings.</p>
+  <div class="how"><h2>One swipe at a time</h2><ol><li>Keep still for one second after starting.</li><li><strong>Up</strong> is toward the screen. <strong>Down</strong> is toward the palm rest.</li><li>Lift your finger and wait for the result before the next swipe.</li></ol><p>Allow about a second for each result. An uncertain result means the sound did not match clearly enough.</p></div>
+  <details><summary>What this preview does</summary><p>Audio is processed by the server on this Mac. Preview audio and results are not saved to disk, and no shortcuts or system actions run.</p><p id="modelDescription">Loading the model description…</p><p>This is an experiment using your two recording sessions. It has not been validated for everyday use, speech, music, or other background sounds.</p><p>Stopping, leaving this page, or switching to another tab releases the microphone. Recording sessions remain available in the collector.</p></details>
+</aside></div>
+<footer>Local prediction only. Use Stop listening whenever you want to release the microphone.</footer>
+</main><script src="/preview.js"></script></body></html>

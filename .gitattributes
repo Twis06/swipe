@@ -1,0 +1,3 @@
+# Keep the exact bytes of checksum-verified inference code on every platform.
+* text=auto eol=lf
+*.npz binary

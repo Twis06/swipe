@@ -1,0 +1,764 @@
+{
+  "summary": {
+    "legacy": {
+      "correct": 37,
+      "wrong": 1,
+      "rejected": 22,
+      "negative_activations": 0
+    },
+    "primary": {
+      "correct": 42,
+      "wrong": 0,
+      "rejected": 18,
+      "negative_activations": 0
+    },
+    "hybrid": {
+      "correct": 49,
+      "wrong": 1,
+      "rejected": 10,
+      "negative_activations": 0
+    }
+  },
+  "folds": {
+    "20261103T165139_cf7201": {
+      "legacy": {
+        "correct": 9,
+        "wrong": 0,
+        "rejected": 11,
+        "negative_activations": 0
+      },
+      "primary": {
+        "correct": 11,
+        "wrong": 0,
+        "rejected": 9,
+        "negative_activations": 0
+      },
+      "hybrid": {
+        "correct": 15,
+        "wrong": 0,
+        "rejected": 5,
+        "negative_activations": 0
+      }
+    },
+    "20261103T200050_87dcb0": {
+      "legacy": {
+        "correct": 15,
+        "wrong": 0,
+        "rejected": 5,
+        "negative_activations": 0
+      },
+      "primary": {
+        "correct": 14,
+        "wrong": 0,
+        "rejected": 6,
+        "negative_activations": 0
+      },
+      "hybrid": {
+        "correct": 17,
+        "wrong": 0,
+        "rejected": 3,
+        "negative_activations": 0
+      }
+    },
+    "20261107T185348_9cbd41": {
+      "legacy": {
+        "correct": 13,
+        "wrong": 1,
+        "rejected": 6,
+        "negative_activations": 0
+      },
+      "primary": {
+        "correct": 17,
+        "wrong": 0,
+        "rejected": 3,
+        "negative_activations": 0
+      },
+      "hybrid": {
+        "correct": 17,
+        "wrong": 1,
+        "rejected": 2,
+        "negative_activations": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "001_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "002_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "003_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "uncertain",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "004_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "005_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "006_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "007_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "008_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "009_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "010_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "011_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "012_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "013_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "uncertain",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "014_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "015_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "016_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "017_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "018_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "019_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "020_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "021_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "uncertain",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "022_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "uncertain",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "023_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "024_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "025_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "026_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "027_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T165139_cf7201",
+      "file": "028_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "001_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "002_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "003_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "004_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "005_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "006_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "007_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "008_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "009_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "010_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "011_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "012_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "013_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "014_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "015_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "016_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "017_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "018_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "019_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "020_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "021_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "uncertain",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "022_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "uncertain",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "023_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "024_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "025_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "uncertain",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "026_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "027_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261103T200050_87dcb0",
+      "file": "028_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "001_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "002_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "003_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "004_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "005_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "006_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "007_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "008_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "009_b1_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "010_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "011_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "012_b1_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "013_b1_up_take1.wav",
+      "truth": "up",
+      "legacy": "down",
+      "primary": "uncertain",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "014_b1_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "015_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "016_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "017_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "018_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "019_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "020_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "021_b2_idle_take1.wav",
+      "truth": "idle",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "022_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "023_b2_typing_take1.wav",
+      "truth": "typing",
+      "legacy": "background",
+      "primary": "background",
+      "hybrid": "background"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "024_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "025_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "026_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "uncertain",
+      "primary": "uncertain",
+      "hybrid": "uncertain"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "027_b2_down_take1.wav",
+      "truth": "down",
+      "legacy": "down",
+      "primary": "down",
+      "hybrid": "down"
+    },
+    {
+      "session": "20261107T185348_9cbd41",
+      "file": "028_b2_up_take1.wav",
+      "truth": "up",
+      "legacy": "up",
+      "primary": "up",
+      "hybrid": "up"
+    }
+  ],
+  "limits": [
+    "Reused development data; not fresh accuracy.",
+    "Legacy first-session cutoff remains a previously estimated heuristic.",
+    "Legacy banks contain only eligible older sessions; MFCC contains both eligible other sessions."
+  ],
+  "passes": true
+}

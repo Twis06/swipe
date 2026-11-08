@@ -1,0 +1,7 @@
+{
+  "policy": "Primary MFCC8 accepted/background results retained. Only MFCC uncertain invokes original selective engine; only accepted legacy direction rescues. No threshold changes.",
+  "reason": "Primary replay improved aggregate metrics but lost two previously accepted correct clips. This is a posthoc follow-up, not fresh validation.",
+  "heldout_check": "MFCC result from existing reference-excluded rejection report; legacy uses frozen OTHER old session model for old queries, original mixed old model for latest queries. Aligned bank excludes old query session and retains original legacy cutoff. Gate sources exclude query session; legacy cutoff remains prior reused-data heuristic.",
+  "promotion": "No added accepted mistakes or negatives relative to legacy baseline, no per-session correct-acceptance loss; stateful replay must preserve every baseline-correct clip with no added mistakes, negatives or duplicates.",
+  "source_sha256": "15b2e24b7d4f11890c53870ee65735c6620b7aefad73357e83dc2fd0f93ffea9"
+}

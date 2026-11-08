@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Grille Lab — gesture recordings</title><link rel="stylesheet" href="/style.css"></head>
+<body><main>
+<header><a href="/" class="brand">Grille Lab<span> / acoustic gestures</span></a><a class="preview-link" href="/preview">Try live preview</a><span id="connection">Local recorder</span></header>
+<div class="layout">
+<section class="workspace" aria-labelledby="title">
+  <h1 id="title">Teach your Mac<br>the sound of a swipe.</h1>
+  <p class="intro">A guided recording session for your 14-inch M3 Pro. Slide a finger along the <strong>left speaker grille</strong>; we’ll save the sound and its label. For repeated movement, <a class="preview-link" href="/continuous">record a continuous 15-second take</a>.</p>
+  <div class="stage" id="stage" data-phase="ready">
+    <div class="stage-top"><span id="phase">Ready when you are</span><span id="trialCount">No session started</span></div>
+    <div id="gestureIcon" aria-hidden="true"><svg viewBox="0 0 100 120"><path d="M50 98V22M25 47L50 22l25 25"/></svg></div>
+    <h2 id="cue" aria-live="polite">Start with a microphone check</h2>
+    <p id="instruction">Connect your microphone, then gently rub the left grille. Watch the level below respond.</p>
+    <input id="typingTarget" type="text" aria-label="Type ordinary words here during the typing trial" placeholder="Type any ordinary words here" autocomplete="off" hidden>
+    <div class="trial-timeline"><div id="trialFill"></div></div>
+  </div>
+  <div class="mic-row"><span id="micStatus">Microphone disconnected</span><canvas id="meter" width="260" height="30" aria-label="Live microphone level"></canvas><span id="level">— dBFS</span></div>
+  <div class="actions"><button id="connect" class="primary">Connect microphone</button><button id="start" class="primary" disabled>Start session</button><button id="pause" disabled>Pause</button><button id="redo" disabled>Discard last & retry</button></div>
+  <p id="notice" role="status">Saved to your project folder. Microphone access begins only when you connect.</p>
+  <div class="progress-row"><label for="progress">Saved recordings <span id="saved">0 / 0</span></label><progress id="progress" value="0" max="1"></progress></div>
+  <section class="recordings"><div class="section-heading"><h2>Recent recordings</h2><a id="export" hidden>Download session ZIP</a></div><p id="empty">Your labeled clips will appear here as you record.</p><ol id="clipList"></ol></section>
+</section>
+<aside>
+  <h2>Set up your session</h2>
+  <label for="device">Microphone</label><select id="device"><option value="">System default — select built-in mic</option></select>
+  <label for="size">Session length</label><select id="size"><option value="pilot">Pilot · 28 clips · about 3 min</option><option value="full">Training · 56 clips · about 6 min</option></select>
+  <label for="surface">Laptop position</label><select id="surface"><option>On a desk</option><option>On my lap</option><option>Other</option></select>
+  <label for="notes">Session notes <span>(optional)</span></label><textarea id="notes" rows="2" placeholder="e.g. right index finger, quiet room"></textarea>
+  <label class="check"><input id="confirmed" type="checkbox">I selected the MacBook’s built-in microphone and can see the level move.</label>
+  <div class="how"><h2>One clean movement</h2><ol><li><strong>Up = toward the screen.</strong><br>Down = toward the palm rest.</li><li>Use the pad of one finger. Swipe the same stretch of the left grille.</li><li>Position during the countdown. Move once when it says <strong>Record</strong>.</li><li>Lift your finger before returning. Keep speakers silent.</li></ol><p>Quiet and typing trials teach the model what to ignore. Cues are visual only.</p></div>
+  <details><summary>Recording details</summary><p>Two-second mono 32-bit float WAV files preserve samples without encoder clipping. An amber high-peak notice alone does not pause recording. Red “possible clipping” indicates repeated flat-topped samples and pauses collection for review. This check can miss other forms of distortion. If it appears during normal swipes, lower the built-in microphone’s Input volume in macOS System Settings → Sound → Input, then check again. Browser echo cancellation, noise suppression, and automatic gain control are requested off; actual settings are saved. This does not guarantee access to unprocessed hardware audio.</p><p>Two shuffled blocks. Each block is tagged separately for later evaluation. Collect another session later for a stronger test.</p><p>The app sends audio only to the local server. If this folder is inside a cloud-synced directory, your sync provider may upload saved recordings.</p><p id="storage"></p><pre id="settings">No microphone connected.</pre></details>
+  <div id="resumeArea" hidden><h2>Continue a saved session</h2><select id="sessions" aria-label="Saved sessions"></select><button id="resume">Load session</button></div>
+</aside></div>
+<footer>Built for a first experiment. A saved clip is a labeled example, not a verified gesture.</footer>
+</main><script src="/app.js"></script></body></html>
